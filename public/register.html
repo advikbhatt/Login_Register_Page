@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Register</title>
+</head>
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap");
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        margin: 0;
+        top: 0;
+    }
+
+    h3 {
+        color: #0e1645;
+        text-align: center;
+    }
+
+    .container h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .container a {
+        text-decoration: none;
+        color: #086cdc;
+        font-family: "Syne", sans-serif;
+
+    }
+
+    .btn {
+        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        background: #086cdc;
+        padding: 15px;
+        font-family: inherit;
+        font-size: 16px;
+        border: 0;
+        border-radius: 5px;
+        font-family: "Syne", sans-serif;
+    }
+
+    .btn:focus {
+        outline: 0;
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    .text {
+        margin-top: 30px;
+        color: #0e1645;
+        font-family: "Syne", sans-serif;
+        text-align: center;
+
+
+    }
+
+    .form-control {
+        position: relative;
+        margin: 20px 0 40px;
+        width: 300px;
+        background-color: transparent;
+        border: transparent;
+        text-align: center;
+
+    }
+
+    a {
+        color: cyan;
+        font-family: "Syne", sans-serif;
+
+    }
+
+    .form-control input {
+        background-color: transparent;
+        border: 0;
+        border: 2px solid lightgrey;
+        border-radius: 6px;
+        display: block;
+        width: 110%;
+        font-size: 14px;
+        padding: 15px;
+        color: black;
+        font-family: "Syne", sans-serif;
+
+
+    }
+
+
+
+    .form-control label {
+        position: absolute;
+        top: 10px;
+        left: 25px;
+        pointer-events: none;
+        color: grey;
+        font-family: "Syne", sans-serif;
+
+    }
+
+    .form-control label span {
+        display: inline-block;
+        font-size: 16px;
+        min-width: 5px;
+        transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+
+    .form-control input:focus+label span,
+    .form-control input:valid+label span {
+        color: black;
+        transform: translateY(-27px);
+    }
+
+    .container {
+        position: absolute;
+        width: 25%;
+        height: 63%;
+        overflow: hidden;
+        left: 37%;
+        top: 17%;
+        background-color: #f4f4fc;
+        padding: 30px;
+        border-radius: 20px;
+        font-family: var(--body-font);
+    }
+
+    input {
+        width: 100%;
+        padding: 15px;
+        margin: 5px;
+        font-family: inherit;
+    }
+
+    .vid{
+        position: absolute;
+        top: 0;
+        left: 0;
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+    }
+    video{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        backdrop-filter: blur(10px);
+    
+    }
+</style>
+
+<body>
+    <div class="vid">
+        <video  src="assets/videos/eye.mp4" autoplay muted></video> 
+        <audio src="assets/audio/audio.mp3" autoplay></audio>
+    </div>
+
+    <div class="container">
+        <div class="login" id="login">
+            <h3 style="font-family: Syne, sans-serif ">Register</h3>
+            <form action="/sign_up " method="post" class="login__form ">
+                <div class="form-control">
+                    <input type="text" name="name" id="inputName4" required>
+                    <label for="inputName4">User Name</label>
+                </div>
+
+                <div class="form-control">
+                    <input type="email" name="email" id="inputEmail4" required>
+                    <label for="inputEmail4">Email Id</label>
+                </div>
+                <div class="form-control">
+                    <input type="password" name="password" id="inputPassword4" required>
+                    <label for="inputPassword4">Password</label>
+                </div>
+                <div class="form-control">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+                <div class="text">Already Registered?&nbsp;&nbsp;&nbsp;
+                    <a href="login.html"> Login here</a>
+            </form>
+        </div>
+
+    </div>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+<script>
+    const labels = document.querySelectorAll('.form-control label')
+
+    labels.forEach(label => {
+        label.innerHTML = label.innerText
+            .split('')
+            .map((letter, idx) => `<span style="transition-delay:${idx * 50}ms">${letter}</span>`)
+            .join('')
+    })
+</script>
+
+</html>

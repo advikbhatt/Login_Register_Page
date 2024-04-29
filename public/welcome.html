@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--=============== REMIXICONS ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+
+
+
+
+
+    <!--=============== CSS ===============-->
+
+    <style>
+        /*=============== GOOGLE FONTS ===============*/
+        @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&display=swap");
+
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+            --header-height: 3.5rem;
+            /*========== Colors ==========*/
+            /*Color mode HSL(hue, saturation, lightness)*/
+            --first-color: hsl(230, 75%, 56%);
+            --title-color: hsl(230, 75%, 15%);
+            --text-color: hsl(230, 12%, 40%);
+            --body-color: hsl(230, 100%, 98%);
+            --container-color: hsl(230, 100%, 97%);
+            --border-color: hsl(230, 25%, 80%);
+            /*========== Font and typography ==========*/
+            /*.5rem = 8px | 1rem = 16px ...*/
+            --body-font: "Syne", sans-serif;
+            --h2-font-size: 1.25rem;
+            --normal-font-size: .938rem;
+            /*========== Font weight ==========*/
+            --font-regular: 400;
+            --font-medium: 500;
+            --font-semi-bold: 600;
+
+            /*========== z index ==========*/
+            --z-fixed: 100;
+            --z-modal: 1000;
+        }
+
+        /*========== Responsive ==========*/
+        @media screen and (min-width: 1023px) {
+            :root {
+                --h2-font-size: 1.5rem;
+                --normal-font-size: 1rem;
+            }
+        }
+
+        /*=============== BASE CSS===============*/
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body,
+        input,
+        button {
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            /* overflow-y: hidden; */
+            overflow-x: hidden;
+
+        }
+
+        body {
+            background-color: var(--body-color);
+            color: var(--text-color);
+
+        }
+
+        input,
+        button {
+            border: none;
+            outline: none;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /*=============== REUSABLE CSS CLASSES ===============*/
+        .container0 {
+            max-width: 1120px;
+            margin-inline: 1.5rem;
+        }
+
+
+        .main__bg {
+            position: absolute;
+            z-index: -1;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+
+
+        }
+
+        .search,
+        .login {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: var(--z-modal);
+            background-color: hsla(230, 75%, 15%, .1);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            padding: 8rem 1.5rem 0;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s;
+        }
+
+        .search__close,
+        .login__close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            font-size: 1.5rem;
+            color: var(--title-color);
+            cursor: pointer;
+        }
+
+        /*=============== HEADER & NAV ===============*/
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(227, 227, 227);
+            z-index: var(--z-fixed);
+            box-shadow: 1px 1px 20px black;
+        }
+
+        .nav {
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav__logo {
+            color: var(--title-color);
+            font-weight: var(--font-semi-bold);
+            transition: color .4s;
+        }
+
+        .nav__actions {
+            display: flex;
+            align-items: center;
+            column-gap: 1rem;
+        }
+
+        .nav__search,
+        .nav__login,
+        .nav__toggle,
+        .nav__close {
+            font-size: 1.25rem;
+            color: var(--title-color);
+            cursor: pointer;
+            transition: color .4s;
+        }
+
+        :is(.nav__logo, .nav__search, .nav__login, .nav__toggle, .nav__link):hover {
+            color: var(--first-color);
+        }
+
+        /* Navigation for mobile devices */
+        @media screen and (max-width: 1023px) {
+            .nav__menu {
+                position: fixed;
+                top: -100%;
+                left: 0;
+                background-color: var(--body-color);
+                box-shadow: 0 8px 16px hsla(230, 75%, 32%, .15);
+                width: 100%;
+                padding-block: 4.5rem 4rem;
+                transition: top .4s;
+            }
+        }
+
+        .nav__list {
+            display: flex;
+            flex-direction: column;
+            row-gap: 2.5rem;
+            text-align: center;
+        }
+
+        .nav__link {
+            color: var(--title-color);
+            font-weight: var(--font-semi-bold);
+            transition: color .4s;
+        }
+
+        .nav__close {
+            position: absolute;
+            top: 1.15rem;
+            right: 1.5rem;
+        }
+
+        /* Show menu */
+        .show-menu {
+            top: 0;
+        }
+
+        /*=============== SEARCH ===============*/
+        .search__form {
+            display: flex;
+            align-items: center;
+            column-gap: .5rem;
+            background-color: var(--container-color);
+            box-shadow: 0 8px 32px hsla(230, 75%, 15%, .2);
+            padding-inline: 1rem;
+            border-radius: .5rem;
+            transform: translateY(-1rem);
+            transition: transform .4s;
+        }
+
+        .search__icon {
+            font-size: 1.25rem;
+            color: var(--title-color);
+        }
+
+        .search__input {
+            width: 100%;
+            padding-block: 1rem;
+            background-color: var(--container-color);
+            color: var(--text-color);
+        }
+
+        .search__input::placeholder {
+            color: var(--text-color);
+        }
+
+        /* Show search */
+        .show-search {
+            opacity: 1;
+            pointer-events: initial;
+        }
+
+        .show-search .search__form {
+            transform: translateY(0);
+        }
+
+
+        /*=============== BREAKPOINTS ===============*/
+        /* For medium devices */
+        @media screen and (min-width: 576px) {
+
+            .search,
+            .login {
+                padding-top: 10rem;
+            }
+
+            .search__form {
+                max-width: 450px;
+                margin-inline: auto;
+            }
+
+            .search__close,
+            .login__close {
+                width: max-content;
+                top: 5rem;
+                left: 0;
+                right: 0;
+                margin-inline: auto;
+                font-size: 2rem;
+            }
+
+            .login__form {
+                max-width: 400px;
+                margin-inline: auto;
+            }
+        }
+
+        /* For large devices */
+        @media screen and (min-width: 1023px) {
+            .nav {
+                height: calc(var(--header-height) + 2rem);
+                column-gap: 3rem;
+            }
+
+            .nav__close,
+            .nav__toggle {
+                display: none;
+            }
+
+            .nav__menu {
+                margin-left: auto;
+            }
+
+            .nav__list {
+                flex-direction: row;
+                column-gap: 3rem;
+            }
+
+            .login__form {
+                padding: 3rem 2rem 3.5rem;
+            }
+        }
+
+        @media screen and (min-width: 1150px) {
+            .container0 {
+                margin-inline: auto;
+            }
+        }
+
+
+        .parallax_container {
+            width: 100vw;
+            height: 100vh;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            -moz-perspective: 10px;
+            -webkit-perspective: 10px;
+            perspective: 10px;
+            background: rgb(206, 206, 206);
+        }
+
+        .parallax_container .basic_setting {
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 100vw;
+            height: 200%;
+            position: absolute;
+            top: 0px;
+            -moz-box-shadow: 0px 0px 300px black inset;
+            -webkit-box-shadow: 0px 0px 300px black inset;
+            box-shadow: 0px 0px 300px black inset;
+            -webkit-filter: brightness(100%);
+            filter: brightness(100%);
+            -moz-transition: -webkit-filter 0.5s;
+            -o-transition: -webkit-filter 0.5s;
+            -webkit-transition: -webkit-filter 0.5s;
+            transition: -webkit-filter 0.5s;
+        }
+
+        .parallax_container .basic_setting:hover {
+            -webkit-filter: brightness(130%);
+            filter: brightness(130%);
+        }
+
+        .parallax_container .parallax_layer_1 {
+            -moz-transform: translateZ(-1px) rotateZ(3deg);
+            -ms-transform: translateZ(-1px) rotateZ(3deg);
+            -webkit-transform: translateZ(-1px) rotateZ(3deg);
+            transform: translateZ(-1px) rotateZ(3deg);
+            background-image: url(assets/images/retro_car28.jpg);
+        }
+
+        .parallax_container .parallax_layer_2 {
+            top: -20%;
+            left: 43%;
+            background-position: right;
+            -moz-transform: translateZ(-10px) rotateZ(-2deg);
+            -ms-transform: translateZ(-10px) rotateZ(-2deg);
+            -webkit-transform: translateZ(-10px) rotateZ(-2deg);
+            transform: translateZ(-10px) rotateZ(-2deg);
+            background-image: url(assets/images/retro_car18.jpg);
+        }
+
+
+        .parallax_container .parallax_layer_3 {
+            top: 10%;
+            left: 20%;
+            -moz-transform: translateZ(-30px) rotateZ(7deg);
+            -ms-transform: translateZ(-30px) rotateZ(7deg);
+            -webkit-transform: translateZ(-30px) rotateZ(7deg);
+            transform: translateZ(-30px) rotateZ(7deg);
+            background-image: url(assets/images/retro_car16.jpg);
+        }
+
+        .parallax_container .parallax_layer_4 {
+            top: 50%;
+            left: -30%;
+            width: 70vw;
+            height: 70vh;
+            background-size: 100% auto;
+            -moz-transform: translateZ(-5px) rotateZ(15deg);
+            -ms-transform: translateZ(-5px) rotateZ(15deg);
+            -webkit-transform: translateZ(-5px) rotateZ(15deg);
+            transform: translateZ(-5px) rotateZ(15deg);
+            background-image: url(assets/images/retro_car5.jpg);
+        }
+        .parallax_container .parallax_layer_6 {
+            top: 130%;
+            left: -60%;
+            width: 70vw;
+            height: 70vh;
+            background-size: 100% auto;
+            -moz-transform: translateZ(-5px) rotateZ(7deg);
+            -ms-transform: translateZ(-5px) rotateZ(7deg);
+            -webkit-transform: translateZ(-5px) rotateZ(7deg);
+            transform: translateZ(-5px) rotateZ(15deg);
+            background-image: url(assets/images/retro_car28.jpg);
+        }
+
+        .parallax_container .parallax_layer_5 {
+            outline: 0px;
+            border: 0px;
+            top: 180%;
+            left: 5%;
+            height: 30vh;
+            width: 30vw;
+            background-size: 100% auto;
+            -moz-transform: rotateZ(-15deg);
+            -ms-transform: rotateZ(-15deg);
+            -webkit-transform: rotateZ(-15deg);
+            transform: rotateZ(-15deg);
+            background-image: url(assets/images/retro_car27.jpg);
+            background-size: cover;
+            -moz-transition: all 0.3s;
+            -o-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        .parallax_container .parallax_layer_5:hover {
+            cursor: pointer;
+        }
+
+        .parallax_container .parallax_layer_5:focus {
+            cursor: pointer;
+            -moz-transform: rotateZ(0deg);
+            -ms-transform: rotateZ(0deg);
+            -webkit-transform: rotateZ(0deg);
+            transform: rotateZ(0deg);
+            top: 130%;
+            left: 10%;
+            width: 80%;
+            height: 80%;
+        }
+
+        .parallax_container .footer {
+            color: white;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 210%;
+        }
+
+        .parallax_container .footer a {
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #ececec;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgba(56, 89, 100, 0.4);
+            border: 2px solid #e3e7f0;
+        }
+
+        ::-webkit-scrollbar-button {
+            height: 0px;
+            background: red;
+            width: 0px;
+        }
+
+        ::-webkit-scrollbar-corner {
+            margin-top: 20px;
+            background-color: #e3e7f1;
+        }
+
+    </style>
+
+    <title>Login - Dashboard</title>
+</head>
+
+<body>
+
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container0">
+            <a href="#" class="nav__logo"> <i class="fa-brands fa-fantasy-flight-games fa-2xl"></i></a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a href="#" class="nav__link"><i class="fa-solid fa-user"></i> Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="contacts.html" class="nav__link"> <i class="fa-solid fa-address-book"></i> Contact
+                            Me</a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="login.html" class="nav__link"> <i
+                                class="fa-solid fa-right-from-bracket fa-flip-horizontal"></i> Log Out</a>
+                    </li>
+                </ul>
+
+                <!-- Close button -->
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <div class="nav__actions">
+                <!-- Search button -->
+                <i class="ri-search-line nav__search" id="search-btn"></i>
+
+                <!-- Toggle button -->
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class="ri-menu-line"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!--==================== SEARCH ====================-->
+    <div class="search" id="search">
+        <form action="" class="search__form user-form" id="form">
+            <i class="ri-search-line search__icon"></i>
+            <input type="text" id="search" placeholder="Search any Car" class="search__input">
+        </form>
+        <i class="ri-close-line search__close" id="search-close"></i>
+    </div>
+
+
+    <div class="parallax_container">
+        <div class="parallax_layer_1 basic_setting"></div>
+        <div class="parallax_layer_2 basic_setting"></div>
+        <div class="parallax_layer_3 basic_setting"></div>
+        <div class="parallax_layer_4 basic_setting"></div>
+        <div class="parallax_layer_6 basic_setting"></div>
+        <!-- <button class="parallax_layer_6 basic_setting"></button> -->
+        <button class="parallax_layer_5 basic_setting"></button>
+        
+    </div>
+
+
+    <!--=============== MAIN JS ===============-->
+    <script>
+        /*============== SEARCH ===============*/
+        const search = document.getElementById('search'),
+            searchBtn = document.getElementById('search-btn'),
+            searchClose = document.getElementById('search-close')
+
+        /* Search show */
+        searchBtn.addEventListener('click', () => {
+            search.classList.add('show-search')
+        })
+
+        /* Search hidden */
+        searchClose.addEventListener('click', () => {
+            search.classList.remove('show-search')
+        })
+
+    </script>
+
+   
+</body>
+
+</html>
